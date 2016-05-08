@@ -9,8 +9,17 @@
             <list>
                 <!-- Partitioned cache example configuration (Atomic mode). -->
                 <bean class="org.apache.ignite.configuration.CacheConfiguration">
-                    <property name="atomicityMode" value="ATOMIC"/>
+                    <property name="name" value="xtSessionCache"/>
+                    <property name="cacheMode" value="PARTITIONED"/>
                     <property name="backups" value="1"/>
+                    <property name="writeSynchronizationMode" value="FULL_SYNC"/>
+
+                    <property name="evictionPolicy">
+                      <!-- LRU eviction policy. -->
+                      <bean class="org.apache.ignite.cache.eviction.lru.LruEvictionPolicy">
+                        <property name="maxSize" value="15000"/>
+                      </bean>
+                    </property>
                 </bean>
             </list>
         </property>
